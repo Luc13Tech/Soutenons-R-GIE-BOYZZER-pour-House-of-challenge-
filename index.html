@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Soutenons RÉGIE BOYZZER 🇧🇯 — House of Challenge</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,700;1,400&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --gold: #FFD000;
+    --red: #C8102E;
+    --green: #008751;
+    --dark: #0a0a0a;
+    --cream: #FFF8EE;
+    --accent: #FF6B35;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--dark);
+    color: var(--cream);
+    font-family: 'Outfit', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 2rem 1rem 4rem;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 70% 50%, rgba(200,16,46,0.35) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 80% at 10% 80%, rgba(0,135,81,0.25) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 50% at 50% 0%, rgba(255,208,0,0.12) 0%, transparent 60%),
+      #0a0a0a;
+    z-index: 0;
+  }
+
+  /* animated grid */
+  .hero-bg::after {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,208,0,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,208,0,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    animation: gridShift 20s linear infinite;
+  }
+  @keyframes gridShift { from { transform: translateY(0); } to { transform: translateY(60px); } }
+
+  .hero-content {
+    position: relative; z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    text-align: center;
+    animation: fadeUp 1s ease both;
+  }
+  @keyframes fadeUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
+
+  .badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: rgba(255,208,0,0.15);
+    border: 1px solid rgba(255,208,0,0.4);
+    border-radius: 50px;
+    padding: 0.4rem 1rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+    animation: fadeUp 1s 0.2s ease both;
+  }
+
+  .flag-strip {
+    display: flex; gap: 0;
+    height: 6px; width: 36px; border-radius: 2px; overflow: hidden;
+  }
+  .flag-strip span { flex: 1; }
+  .flag-strip .f1 { background: var(--green); }
+  .flag-strip .f2 { background: var(--gold); }
+  .flag-strip .f3 { background: var(--red); }
+
+  .hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3.5rem, 12vw, 8rem);
+    line-height: 0.9;
+    letter-spacing: 3px;
+    color: #fff;
+    animation: fadeUp 1s 0.3s ease both;
+  }
+
+  .hero h1 span {
+    background: linear-gradient(135deg, var(--gold) 0%, var(--accent) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .tagline {
+    font-size: clamp(0.9rem, 2.5vw, 1.15rem);
+    font-weight: 300;
+    color: rgba(255,248,238,0.7);
+    max-width: 520px;
+    line-height: 1.7;
+    animation: fadeUp 1s 0.4s ease both;
+  }
+
+  /* ── CANDIDATE CARD ── */
+  .candidate-section {
+    position: relative; z-index: 2;
+    margin-top: 2.5rem;
+    animation: fadeUp 1s 0.5s ease both;
+  }
+
+  .candidate-card {
+    background: linear-gradient(135deg, rgba(255,255,255,0.07) 0%, rgba(255,208,0,0.05) 100%);
+    border: 1px solid rgba(255,208,0,0.25);
+    border-radius: 24px;
+    padding: 2rem 2.5rem;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    max-width: 620px;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 0 60px rgba(255,208,0,0.08), inset 0 1px 0 rgba(255,255,255,0.1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .candidate-card::before {
+    content: '';
+    position: absolute;
+    top: -2px; left: 20%; right: 20%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  .candidate-img-wrap {
+    flex-shrink: 0;
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold), var(--accent), var(--red));
+    padding: 3px;
+    box-shadow: 0 0 30px rgba(255,208,0,0.3);
+    animation: pulse 3s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%,100% { box-shadow: 0 0 30px rgba(255,208,0,0.3); }
+    50% { box-shadow: 0 0 50px rgba(255,208,0,0.6); }
+  }
+
+  .candidate-img-wrap img {
+    width: 100%; height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #1a1a1a;
+  }
+
+  .candidate-placeholder {
+    width: 100%; height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2.5rem;
+  }
+
+  .candidate-info h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.9rem;
+    letter-spacing: 2px;
+    background: linear-gradient(135deg, var(--gold), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+  }
+
+  .candidate-info .country {
+    font-size: 0.85rem;
+    color: rgba(255,248,238,0.6);
+    margin: 0.3rem 0;
+    display: flex; align-items: center; gap: 0.4rem;
+  }
+
+  .candidate-info .followers {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    background: rgba(200,16,46,0.25);
+    border: 1px solid rgba(200,16,46,0.4);
+    border-radius: 50px;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #ff6b8a;
+    margin-top: 0.5rem;
+  }
+
+  .candidate-info .event-info {
+    margin-top: 0.75rem;
+    font-size: 0.78rem;
+    color: rgba(255,248,238,0.45);
+    line-height: 1.6;
+  }
+
+  /* ── SCROLL CTA ── */
+  .scroll-cta {
+    position: relative; z-index: 2;
+    margin-top: 2.5rem;
+    display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+    animation: fadeUp 1s 0.7s ease both;
+  }
+
+  .scroll-cta p {
+    font-size: 0.85rem;
+    color: rgba(255,248,238,0.5);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .scroll-arrow {
+    width: 40px; height: 40px;
+    border: 1px solid rgba(255,208,0,0.3);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    animation: bounce 2s ease-in-out infinite;
+    cursor: pointer;
+    text-decoration: none;
+    color: var(--gold);
+  }
+  @keyframes bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
+
+  /* ── GENERATOR SECTION ── */
+  .generator-section {
+    padding: 5rem 1rem;
+    position: relative;
+    background: linear-gradient(180deg, var(--dark) 0%, #0d0d0d 100%);
+  }
+
+  .section-title {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .section-title h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 7vw, 5rem);
+    letter-spacing: 3px;
+    color: #fff;
+    line-height: 1;
+  }
+
+  .section-title h2 span { color: var(--gold); }
+
+  .section-title p {
+    color: rgba(255,248,238,0.5);
+    margin-top: 0.75rem;
+    font-size: 0.95rem;
+    max-width: 480px;
+    margin-inline: auto;
+    line-height: 1.7;
+  }
+
+  .generator-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+
+  /* ── FORM ── */
+  .form-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 20px;
+    padding: 2rem;
+    backdrop-filter: blur(10px);
+  }
+
+  .form-group {
+    margin-bottom: 1.25rem;
+  }
+
+  label {
+    display: block;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255,248,238,0.5);
+    margin-bottom: 0.5rem;
+  }
+
+  input[type="text"] {
+    width: 100%;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px;
+    padding: 0.85rem 1rem;
+    color: var(--cream);
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+
+  input[type="text"]:focus {
+    border-color: rgba(255,208,0,0.5);
+    box-shadow: 0 0 0 3px rgba(255,208,0,0.08);
+  }
+
+  input[type="text"]::placeholder { color: rgba(255,248,238,0.25); }
+
+  /* Photo upload */
+  .upload-zone {
+    border: 2px dashed rgba(255,208,0,0.25);
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+    background: rgba(255,208,0,0.02);
+  }
+
+  .upload-zone:hover {
+    border-color: rgba(255,208,0,0.5);
+    background: rgba(255,208,0,0.05);
+  }
+
+  .upload-zone input[type="file"] {
+    position: absolute; inset: 0;
+    opacity: 0; cursor: pointer; width: 100%; height: 100%;
+  }
+
+  .upload-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+  .upload-zone p { font-size: 0.82rem; color: rgba(255,248,238,0.4); line-height: 1.5; }
+  .upload-zone .upload-hint { color: var(--gold); font-weight: 600; font-size: 0.85rem; }
+
+  #preview-thumb {
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--gold);
+    margin: 0.75rem auto 0;
+    display: none;
+  }
+
+  /* Generate button */
+  .btn-generate {
+    width: 100%;
+    padding: 1rem;
+    background: linear-gradient(135deg, var(--gold) 0%, var(--accent) 100%);
+    color: var(--dark);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.3rem;
+    letter-spacing: 2px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.3s;
+    margin-top: 0.5rem;
+    box-shadow: 0 4px 30px rgba(255,208,0,0.3);
+  }
+
+  .btn-generate:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 40px rgba(255,208,0,0.5);
+  }
+
+  .btn-generate:active { transform: translateY(0); }
+
+  /* ── POSTER PREVIEW ── */
+  .poster-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 20px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .poster-placeholder {
+    width: 100%;
+    aspect-ratio: 3/4;
+    background: linear-gradient(135deg, #111 0%, #1a1a1a 100%);
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    color: rgba(255,248,238,0.2);
+    font-size: 0.85rem;
+    text-align: center;
+    padding: 1rem;
+  }
+
+  .poster-placeholder-icon { font-size: 3rem; opacity: 0.3; }
+
+  /* Canvas poster */
+  #posterCanvas {
+    width: 100%;
+    border-radius: 14px;
+    display: none;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+  }
+
+  .btn-download {
+    width: 100%;
+    padding: 0.85rem;
+    background: rgba(255,208,0,0.1);
+    border: 1px solid rgba(255,208,0,0.35);
+    color: var(--gold);
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: none;
+  }
+
+  .btn-download:hover {
+    background: rgba(255,208,0,0.2);
+    border-color: var(--gold);
+  }
+
+  /* ── HOW IT WORKS ── */
+  .steps-section {
+    padding: 4rem 1rem;
+    background: #080808;
+  }
+
+  .steps-grid {
+    max-width: 800px;
+    margin: 2.5rem auto 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    text-align: center;
+  }
+
+  .step {
+    padding: 1.5rem 1rem;
+  }
+
+  .step-num {
+    width: 56px; height: 56px;
+    background: linear-gradient(135deg, rgba(255,208,0,0.15), rgba(255,107,53,0.15));
+    border: 1px solid rgba(255,208,0,0.3);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    color: var(--gold);
+    margin: 0 auto 1rem;
+  }
+
+  .step h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  .step p {
+    font-size: 0.82rem;
+    color: rgba(255,248,238,0.45);
+    line-height: 1.6;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 2rem 1rem;
+    text-align: center;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    background: var(--dark);
+  }
+
+  footer p {
+    font-size: 0.8rem;
+    color: rgba(255,248,238,0.25);
+    line-height: 2;
+  }
+
+  footer .designer {
+    color: var(--gold);
+    font-weight: 600;
+  }
+
+  footer .hoc-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    color: rgba(255,248,238,0.15);
+    margin-bottom: 0.5rem;
+  }
+
+  /* ── STARS BG ── */
+  .stars {
+    position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    overflow: hidden;
+  }
+
+  .star {
+    position: absolute;
+    width: 2px; height: 2px;
+    background: rgba(255,255,255,0.4);
+    border-radius: 50%;
+    animation: twinkle var(--dur, 3s) ease-in-out infinite var(--delay, 0s);
+  }
+  @keyframes twinkle {
+    0%,100% { opacity: 0; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.5); }
+  }
+
+  /* Responsive */
+  @media (max-width: 640px) {
+    .generator-wrapper { grid-template-columns: 1fr; }
+    .candidate-card { flex-direction: column; text-align: center; padding: 1.5rem; }
+    .candidate-info .country { justify-content: center; }
+    .steps-grid { grid-template-columns: 1fr; }
+    .candidate-img-wrap { width: 100px; height: 100px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Stars -->
+<div class="stars" id="stars"></div>
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="hero-bg"></div>
+
+  <div class="hero-content">
+    <div class="badge">
+      <div class="flag-strip"><span class="f1"></span><span class="f2"></span><span class="f3"></span></div>
+      House of Challenge · Édition 8 · Spécial Startup Afrique
+    </div>
+
+    <h1>Soutenons<br/><span>Régie Boyzzer</span></h1>
+
+    <p class="tagline">
+      Elle représente le Bénin sur la scène panafricaine.<br/>
+      15 000 000 FCFA en jeu pour propulser une startup de notre pays.
+      <strong style="color:var(--gold);">Soyons derrière elle !</strong>
+    </p>
+
+    <!-- Candidate card -->
+    <div class="candidate-section">
+      <div class="candidate-card">
+        <div class="candidate-img-wrap">
+          <div class="candidate-placeholder">👑</div>
+        </div>
+        <div class="candidate-info">
+          <h2>Régie Boyzzer</h2>
+          <div class="country">
+            <div class="flag-strip"><span class="f1"></span><span class="f2"></span><span class="f3"></span></div>
+            Représentante du Bénin
+          </div>
+          <div class="followers">❤️ 2,2 M Followers</div>
+          <div class="event-info">
+            📅 20 Mars — 11 Avril 2026<br/>
+            📍 Hôtel Petit Brussel · Diffusé sur NBiKO TV
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="scroll-cta">
+      <p>Créez votre affiche de soutien</p>
+      <a class="scroll-arrow" href="#generator">↓</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ HOW IT WORKS ══ -->
+<section class="steps-section">
+  <div class="section-title">
+    <h2>Comment ça <span style="color:var(--gold)">marche</span> ?</h2>
+    <p>En 3 étapes simples, obtenez votre affiche personnalisée de soutien</p>
+  </div>
+  <div class="steps-grid">
+    <div class="step">
+      <div class="step-num">1</div>
+      <h3>Remplissez le formulaire</h3>
+      <p>Entrez votre nom, prénom et choisissez votre photo depuis votre galerie</p>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <h3>Générez votre affiche</h3>
+      <p>Cliquez sur "Générer" — votre affiche de soutien est créée instantanément</p>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <h3>Partagez partout !</h3>
+      <p>Téléchargez et partagez sur TikTok, WhatsApp, Instagram pour soutenir Régie</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ GENERATOR ══ -->
+<section class="generator-section" id="generator">
+  <div class="section-title">
+    <h2>Votre affiche de <span>soutien</span></h2>
+    <p>Personnalisez et générez votre affiche officielle pour soutenir notre candidate béninoise</p>
+  </div>
+
+  <div class="generator-wrapper">
+    <!-- Form -->
+    <div class="form-card">
+      <div class="form-group">
+        <label>Votre Prénom</label>
+        <input type="text" id="inputPrenom" placeholder="ex: Fatou"/>
+      </div>
+      <div class="form-group">
+        <label>Votre Nom</label>
+        <input type="text" id="inputNom" placeholder="ex: Kouassi"/>
+      </div>
+      <div class="form-group">
+        <label>Votre Photo</label>
+        <div class="upload-zone" id="uploadZone">
+          <input type="file" id="photoInput" accept="image/*"/>
+          <div class="upload-icon">📸</div>
+          <p class="upload-hint">Choisir une photo</p>
+          <p>depuis votre galerie</p>
+          <img id="preview-thumb" src="" alt="preview"/>
+        </div>
+      </div>
+      <button class="btn-generate" onclick="generatePoster()">✨ GÉNÉRER MON AFFICHE</button>
+    </div>
+
+    <!-- Poster preview -->
+    <div class="poster-card">
+      <div class="poster-placeholder" id="posterPlaceholder">
+        <div class="poster-placeholder-icon">🖼️</div>
+        <p>Votre affiche de soutien<br/>apparaîtra ici</p>
+      </div>
+      <canvas id="posterCanvas" width="600" height="800"></canvas>
+      <button class="btn-download" id="downloadBtn" onclick="downloadPoster()">⬇️ Télécharger mon affiche</button>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="hoc-logo">HOUSE OF CHALLENGE — ÉDITION 8</div>
+  <p>🇧🇯 Ensemble, propulsons la startup du Bénin vers la victoire !</p>
+  <p style="margin-top:0.5rem;">
+    Site conçu avec ❤️ par <span class="designer">Luc DEGUENON</span>
+  </p>
+  <p>#HouseOfChallenge #Bénin #RégieBoyzzer #StartupAfrique</p>
+</footer>
+
+<script>
+/* ── Stars ── */
+const starsEl = document.getElementById('stars');
+for (let i = 0; i < 60; i++) {
+  const s = document.createElement('div');
+  s.className = 'star';
+  s.style.cssText = `
+    left:${Math.random()*100}%;
+    top:${Math.random()*100}%;
+    --dur:${2+Math.random()*4}s;
+    --delay:${Math.random()*4}s;
+    width:${Math.random()<0.3?3:2}px;
+    height:${Math.random()<0.3?3:2}px;
+  `;
+  starsEl.appendChild(s);
+}
+
+/* ── Photo upload preview ── */
+const photoInput = document.getElementById('photoInput');
+const previewThumb = document.getElementById('preview-thumb');
+let userPhotoData = null;
+
+photoInput.addEventListener('change', function() {
+  const file = this.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    userPhotoData = e.target.result;
+    previewThumb.src = userPhotoData;
+    previewThumb.style.display = 'block';
+  };
+  reader.readAsDataURL(file);
+});
+
+/* ── POSTER GENERATOR ── */
+function generatePoster() {
+  const prenom = document.getElementById('inputPrenom').value.trim();
+  const nom = document.getElementById('inputNom').value.trim();
+
+  if (!prenom && !nom) {
+    alert('Veuillez entrer votre nom et prénom avant de générer l\'affiche.');
+    return;
+  }
+
+  const canvas = document.getElementById('posterCanvas');
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+
+  // Background
+  const bg = ctx.createLinearGradient(0, 0, W, H);
+  bg.addColorStop(0, '#0a0202');
+  bg.addColorStop(0.4, '#1a0505');
+  bg.addColorStop(1, '#050a05');
+  ctx.fillStyle = bg;
+  ctx.fillRect(0, 0, W, H);
+
+  // Red accent blob
+  const radGrad = ctx.createRadialGradient(W*0.75, H*0.3, 0, W*0.75, H*0.3, 300);
+  radGrad.addColorStop(0, 'rgba(200,16,46,0.45)');
+  radGrad.addColorStop(1, 'transparent');
+  ctx.fillStyle = radGrad;
+  ctx.fillRect(0, 0, W, H);
+
+  // Green accent
+  const greenGrad = ctx.createRadialGradient(0, H*0.9, 0, 0, H*0.9, 250);
+  greenGrad.addColorStop(0, 'rgba(0,135,81,0.35)');
+  greenGrad.addColorStop(1, 'transparent');
+  ctx.fillStyle = greenGrad;
+  ctx.fillRect(0, 0, W, H);
+
+  // Grid overlay
+  ctx.strokeStyle = 'rgba(255,208,0,0.04)';
+  ctx.lineWidth = 1;
+  for (let x = 0; x < W; x += 50) { ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,H); ctx.stroke(); }
+  for (let y = 0; y < H; y += 50) { ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(W,y); ctx.stroke(); }
+
+  // Top bar — Benin flag colors
+  ctx.fillStyle = '#008751'; ctx.fillRect(0, 0, W, 12);
+  ctx.fillStyle = '#FFD000'; ctx.fillRect(0, 12, W, 12);
+  ctx.fillStyle = '#C8102E'; ctx.fillRect(0, 24, W, 12);
+
+  // ── LAYOUT (top → bottom, rien ne se chevauche) ──
+  // Zone 1 : label événement       Y=36→70
+  // Zone 2 : "JE SOUTIENS"         Y=80→140
+  // Zone 3 : "RÉGIE BOYZZER"       Y=145→210
+  // Zone 4 : drapeau + ligne sep.  Y=215→250
+  // Zone 5 : photo (centre=360)    Y=260→470  (rayon=100)
+  // Zone 6 : "SOUTENU PAR"         Y=490
+  // Zone 7 : nom supporter          Y=540
+  // Zone 8 : ligne sep.             Y=560
+  // Zone 9 : citation               Y=600
+  // Zone 10: hashtags               Y=635
+  // Zone 11: barre infos            Y=680→740
+  // Zone 12: bandes drapeau         Y=788→800
+
+  const photoR = 100;
+  const photoX = W / 2;
+  const photoY = 360; // centre de la photo
+
+  // ── Textes du haut ──
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'alphabetic';
+
+  // Label événement
+  ctx.font = 'bold 15px Outfit, sans-serif';
+  ctx.fillStyle = 'rgba(255,208,0,0.75)';
+  ctx.fillText('HOUSE OF CHALLENGE · ÉDITION 8 · SPÉCIAL STARTUP AFRIQUE', W/2, 58);
+
+  // "JE SOUTIENS"
+  ctx.font = 'bold 68px Bebas Neue, Impact, sans-serif';
+  const gTitle = ctx.createLinearGradient(0, 80, W, 150);
+  gTitle.addColorStop(0, '#FFD000');
+  gTitle.addColorStop(1, '#FF6B35');
+  ctx.fillStyle = gTitle;
+  ctx.fillText('JE SOUTIENS', W/2, 135);
+
+  // "RÉGIE BOYZZER 👑"
+  ctx.font = 'bold 58px Bebas Neue, Impact, sans-serif';
+  ctx.fillStyle = '#FFFFFF';
+  ctx.fillText('RÉGIE BOYZZER 👑', W/2, 200);
+
+  // Drapeau Bénin centré
+  const fx = W/2 - 30, fy = 216;
+  ctx.fillStyle = '#008751'; ctx.fillRect(fx, fy, 20, 14);
+  ctx.fillStyle = '#FFD000'; ctx.fillRect(fx+20, fy, 20, 14);
+  ctx.fillStyle = '#C8102E'; ctx.fillRect(fx+40, fy, 20, 14);
+  ctx.strokeStyle = 'rgba(255,255,255,0.25)';
+  ctx.lineWidth = 1;
+  ctx.strokeRect(fx, fy, 60, 14);
+
+  // Ligne séparatrice
+  const gLine = ctx.createLinearGradient(80, 0, W-80, 0);
+  gLine.addColorStop(0, 'transparent');
+  gLine.addColorStop(0.5, '#FFD000');
+  gLine.addColorStop(1, 'transparent');
+  ctx.strokeStyle = gLine;
+  ctx.lineWidth = 1.5;
+  ctx.beginPath();
+  ctx.moveTo(80, 245); ctx.lineTo(W-80, 245);
+  ctx.stroke();
+
+  // ── USER PHOTO (centrée, bien en dessous du titre) ──
+  // Glow
+  const ringGrad = ctx.createRadialGradient(photoX, photoY, photoR-10, photoX, photoY, photoR+25);
+  ringGrad.addColorStop(0, 'rgba(255,208,0,0.5)');
+  ringGrad.addColorStop(1, 'transparent');
+  ctx.fillStyle = ringGrad;
+  ctx.beginPath();
+  ctx.arc(photoX, photoY, photoR+25, 0, Math.PI*2);
+  ctx.fill();
+
+  // Anneau doré
+  ctx.save();
+  ctx.beginPath();
+  ctx.arc(photoX, photoY, photoR+5, 0, Math.PI*2);
+  ctx.lineWidth = 5;
+  const ringStroke = ctx.createLinearGradient(photoX-photoR, photoY-photoR, photoX+photoR, photoY+photoR);
+  ringStroke.addColorStop(0, '#FFD000');
+  ringStroke.addColorStop(0.5, '#FF6B35');
+  ringStroke.addColorStop(1, '#C8102E');
+  ctx.strokeStyle = ringStroke;
+  ctx.stroke();
+  ctx.restore();
+
+  // Clip & dessin photo
+  ctx.save();
+  ctx.beginPath();
+  ctx.arc(photoX, photoY, photoR, 0, Math.PI*2);
+  ctx.clip();
+
+  const finishPoster = () => {
+    ctx.restore();
+
+    // ── Textes du bas ──
+    const afterPhoto = photoY + photoR; // = 460
+
+    // "SOUTENU PAR"
+    ctx.font = '300 16px Outfit, sans-serif';
+    ctx.fillStyle = 'rgba(255,248,238,0.5)';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'alphabetic';
+    ctx.fillText('SOUTENU PAR', W/2, afterPhoto + 35);
+
+    // Nom du supporter
+    const fullName = [prenom, nom].filter(Boolean).join(' ').toUpperCase() || 'UN(E) SUPPORTER(TRICE)';
+    ctx.font = 'bold 46px Bebas Neue, Impact, sans-serif';
+    const nameGrad = ctx.createLinearGradient(0, afterPhoto+40, W, afterPhoto+90);
+    nameGrad.addColorStop(0, '#FFD000');
+    nameGrad.addColorStop(1, '#FF6B35');
+    ctx.fillStyle = nameGrad;
+    ctx.fillText(fullName, W/2, afterPhoto + 85);
+
+    // Ligne séparatrice
+    const gLine2 = ctx.createLinearGradient(100, 0, W-100, 0);
+    gLine2.addColorStop(0, 'transparent');
+    gLine2.addColorStop(0.5, 'rgba(255,208,0,0.35)');
+    gLine2.addColorStop(1, 'transparent');
+    ctx.strokeStyle = gLine2;
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(80, afterPhoto+100); ctx.lineTo(W-80, afterPhoto+100);
+    ctx.stroke();
+
+    // Citation
+    ctx.font = 'italic 18px Playfair Display, serif';
+    ctx.fillStyle = 'rgba(255,248,238,0.7)';
+    ctx.fillText('"Ensemble, propulsons le Bénin vers la victoire !"', W/2, afterPhoto + 132);
+
+    // Hashtags
+    ctx.font = '600 14px Outfit, sans-serif';
+    ctx.fillStyle = 'rgba(255,208,0,0.6)';
+    ctx.fillText('#RégieBoyzzer  #Bénin  #StartupAfrique  #HOC8', W/2, afterPhoto + 162);
+
+    // Barre infos en bas
+    const barY = H - 100;
+    ctx.fillStyle = 'rgba(255,255,255,0.04)';
+    roundRect(ctx, 30, barY, W-60, 62, 12);
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(255,208,0,0.15)';
+    ctx.lineWidth = 1;
+    roundRect(ctx, 30, barY, W-60, 62, 12);
+    ctx.stroke();
+
+    ctx.font = '600 14px Outfit, sans-serif';
+    ctx.fillStyle = 'rgba(255,248,238,0.5)';
+    ctx.fillText('📅 20 Mars – 11 Avril 2026  ·  📍 Hôtel Petit Brussel  ·  📺 NBiKO TV', W/2, barY + 24);
+
+    ctx.font = '300 12px Outfit, sans-serif';
+    ctx.fillStyle = 'rgba(255,208,0,0.4)';
+    ctx.fillText('Site conçu par Luc DEGUENON', W/2, barY + 46);
+
+    // Bandes drapeau en bas
+    ctx.fillStyle = '#008751'; ctx.fillRect(0, H-12, W, 4);
+    ctx.fillStyle = '#FFD000'; ctx.fillRect(0, H-8,  W, 4);
+    ctx.fillStyle = '#C8102E'; ctx.fillRect(0, H-4,  W, 4);
+
+    showPoster(canvas);
+  };
+
+  if (userPhotoData) {
+    const img = new Image();
+    img.onload = () => {
+      // Dessiner en couvrant bien le cercle (cover)
+      const side = photoR * 2;
+      ctx.drawImage(img, photoX - photoR, photoY - photoR, side, side);
+      finishPoster();
+    };
+    img.src = userPhotoData;
+  } else {
+    ctx.fillStyle = '#1a1a1a';
+    ctx.fillRect(photoX-photoR, photoY-photoR, photoR*2, photoR*2);
+    ctx.font = '72px sans-serif';
+    ctx.fillStyle = 'rgba(255,255,255,0.25)';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('👤', photoX, photoY);
+    finishPoster();
+  }
+}
+
+function roundRect(ctx, x, y, w, h, r) {
+  ctx.beginPath();
+  ctx.moveTo(x+r, y);
+  ctx.lineTo(x+w-r, y);
+  ctx.quadraticCurveTo(x+w, y, x+w, y+r);
+  ctx.lineTo(x+w, y+h-r);
+  ctx.quadraticCurveTo(x+w, y+h, x+w-r, y+h);
+  ctx.lineTo(x+r, y+h);
+  ctx.quadraticCurveTo(x, y+h, x, y+h-r);
+  ctx.lineTo(x, y+r);
+  ctx.quadraticCurveTo(x, y, x+r, y);
+  ctx.closePath();
+}
+
+function showPoster(canvas) {
+  document.getElementById('posterPlaceholder').style.display = 'none';
+  canvas.style.display = 'block';
+  document.getElementById('downloadBtn').style.display = 'block';
+  canvas.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function downloadPoster() {
+  const canvas = document.getElementById('posterCanvas');
+  const a = document.createElement('a');
+  const prenom = document.getElementById('inputPrenom').value.trim() || 'supporter';
+  a.download = `soutien-regie-boyzzer-${prenom.toLowerCase()}.png`;
+  a.href = canvas.toDataURL('image/png');
+  a.click();
+}
+</script>
+</body>
+</html>
